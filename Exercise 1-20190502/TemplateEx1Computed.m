@@ -70,8 +70,8 @@ bf_95 = s1/s2*sqrt(finv(0.975,f2,f1));
 
 %Homework
 % for S = 99%
-% af_99 = 
-% bf_99 = 
+af_99 = s1/s2*sqrt(1/finv(0.995,f1,f2)); 
+bf_99 = s1/s2*sqrt(finv(0.995,f2,f1)); 
 
 %Statistical test for a = 0.05 S = 95%
 T_F = (s1^2)/(s2^2);
@@ -84,6 +84,16 @@ else
     disp('Rejects the Ho.')
 end
 
+%Statistical test for a = 0.01 S = 99%
+T_F = (s1^2)/(s2^2);
+F_lo_99 = finv(0.995,f1,f2);     
+F_up_99 = finv(0.995,f2,f1);    
+ 
+if F_lo_99<T_F && T_F<F_up_99
+    disp('Fails to reject the Ho.')
+else
+    disp('Rejects the Ho.')
+end
 
 %Plot the x^2 - distribution
 x_axe = 0:0.01:50; 
