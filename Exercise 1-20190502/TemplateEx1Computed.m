@@ -68,11 +68,6 @@ ylabel('Density function');
 af_95 = s1/s2*sqrt(1/finv(0.975,f1,f2));   
 bf_95 = s1/s2*sqrt(finv(0.975,f2,f1));   
 
-%Homework
-% for S = 99%
-af_99 = s1/s2*sqrt(1/finv(0.995,f1,f2)); 
-bf_99 = s1/s2*sqrt(finv(0.995,f2,f1)); 
-
 %Statistical test for a = 0.05 S = 95%
 T_F = (s1^2)/(s2^2);
 F_lo = finv(0.975,f1,f2);     
@@ -83,6 +78,11 @@ if F_lo<T_F && T_F<F_up
 else
     disp('Rejects the Ho.')
 end
+
+%Homework
+% for S = 99%
+af_99 = s1/s2*sqrt(1/finv(0.995,f1,f2)); 
+bf_99 = s1/s2*sqrt(finv(0.995,f2,f1)); 
 
 %Statistical test for a = 0.01 S = 99%
 T_F = (s1^2)/(s2^2);
@@ -107,8 +107,8 @@ legend('x^2_f_1','x^2_f_2');
 
 %Calculate the confidence limits of x^2-Distribution
 % S = 95%  a = 0.05 
-a1chi2_95 = s1*sqrt(f1/chi2inv(0.975,f1));   % a/2 
-b1chi2_95 = s1*sqrt(f1/chi2inv(0.025,f1));   % 1-a/2
+a1chi2_95 = s1*sqrt(f1/chi2inv(0.975,f1));   % 1-a/2
+b1chi2_95 = s1*sqrt(f1/chi2inv(0.025,f1));   %  a/2 
 
 a2chi2_95 = s2*sqrt(f2/chi2inv(0.975,f2));   
 b2chi2_95 = s2*sqrt(f2/chi2inv(0.025,f2));    
@@ -116,7 +116,11 @@ b2chi2_95 = s2*sqrt(f2/chi2inv(0.025,f2));
 
 %Homework
 % S = 99% a = 0.01
+a1chi2_99 = s1*sqrt(f1/chi2inv(0.995,f1));
+b1chi2_99 = s1*sqrt(f1/chi2inv(0.005,f1));
 
+a2chi2_99 = s1*sqrt(f2/chi2inv(0.995,f2));
+b2chi2_99 = s1*sqrt(f2/chi2inv(0.005,f2));
 
 %Statistical test for a = 0.05 S = 95%  
 % For epoch2011
