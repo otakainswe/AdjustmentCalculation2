@@ -1,1 +1,2 @@
-.pdf
+# do not upload pdf
+*.pdf
