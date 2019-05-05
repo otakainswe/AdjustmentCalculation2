@@ -85,18 +85,31 @@ end
 % Task 3
 %--------------------------------------------------------------------------
 
-% Ho: 
-% Ha: 
-% 
-% s2_2
-% s2_5
-% 
-% f=
-% 
-% Tf
-% tf = finv(0.95,f,f);
-% 
-% if Tf<tf
+% Ho: s2_2 = s2_5
+% Ha: s2_2 != s2_5
+
+% variances of obs
+s2_2 = 61.0;
+s2_5 = 54.0;
+
+% Degree of Freedom
+f= 9; % 10-1 
+
+%Statistical test for a = 0.05 S = 95%
+% Test statistic of F-test
+T_F = (s2_2)/(s2_5);
+
+% Threshold value of F-test
+% One-sided 
+t_F_lo = finv(0.95,f,f);        
+ 
+if  T_F <t_F_lo
+    disp('Fails to reject the Ho.')
+else
+    disp('Rejects the Ho.')
+end
+
+
     
 
 
