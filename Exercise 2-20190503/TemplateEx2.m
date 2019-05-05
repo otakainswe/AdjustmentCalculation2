@@ -39,9 +39,9 @@ t_t = tinv(0.95,9);
 
 % Statistical test for a = 0.05 S = 95%
 if T_t < t_t
-    disp('Fails to reject the Ho.')
+    disp('Fails to reject the Task1 Ho.')
 else
-    disp('Rejects the Ho.')
+    disp('Rejects the Task1 Ho.')
 end
 
 % [h,p,ci,stats] = ttest(E,x_bar);
@@ -75,9 +75,9 @@ t_chi2_up = chi2inv(0.975,f);
 
 %Statistical test for a = 0.05 S = 95%
 if t_chi2_lo<T_chi2 && T_chi2<t_chi2_up
-    disp('Fails to reject the Ho.')
+    disp('Fails to reject the Task2 Ho.')
 else
-    disp('Rejects the Ho.')
+    disp('Rejects the Task2 Ho.')
 end
 
 
@@ -104,10 +104,46 @@ T_F = (s2_2)/(s2_5);
 t_F_lo = finv(0.95,f,f);        
  
 if  T_F <t_F_lo
-    disp('Fails to reject the Ho.')
+    disp('Fails to reject the Task3 Ho.')
 else
-    disp('Rejects the Ho.')
+    disp('Rejects the Task3 Ho.')
 end
+
+
+%--------------------------------------------------------------------------
+% Task 4
+%--------------------------------------------------------------------------
+
+% Ho: x_bar = E(x)  
+% Ha: x_bar != E(x)     
+
+% expectation value: E(x)
+E = 6; 
+
+% mean
+x_bar = 5.5; 
+
+% std of mean
+s_x_bar = 1.0;
+
+% Degree of Freedom
+f = 15; % 16-1 
+
+% Test statistics of t-test
+T_t = (E-x_bar)/s_x_bar;
+
+% Threshold value of t-test
+t_t = tinv(0.95,15);
+
+% Statistical test for a = 0.05 S = 95%
+if T_t < t_t
+    disp('Fails to reject the Task4 Ho.')
+else
+    disp('Rejects the Task4 Ho.')
+end
+
+
+
 
 
     
