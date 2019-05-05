@@ -171,7 +171,44 @@ else
     disp('Rejects the Task5 Ho.')
 end
 
+%--------------------------------------------------------------------------
+% Task 6
+%--------------------------------------------------------------------------
 
+% Ho: x1_bar = x2_bar 
+% Ha: x1_bar != x2_bar    
+
+% sample mean
+x1_bar = 8.73;
+x2_bar = 8.68;
+
+% sample variance
+s2_x1 = 0.35;
+s2_x2 = 0.40;
+
+% % sample std
+% x_x1 = sqrt(s2_x1);
+% x_x2 = sqrt(s2_x2);
+
+% sample size
+n1 = 15;
+n2 = 17;
+
+% Degree of Freedom
+f = (n1-1) + (n2-1); 
+
+% Test statistics of two-sample t-test
+T_2t = (x1_bar-x2_bar) / sqrt((s2_x1/n1) + (s2_x2/n2));
+
+% Threshold value of two-sample t-test
+t_2t = tinv(0.95,30);
+
+% Statistical test for a = 0.05 S = 95%
+if T_t < t_t
+    disp('Fails to reject the Task6 Ho.')
+else
+    disp('Rejects the Task6 Ho.')
+end
 
 
 
