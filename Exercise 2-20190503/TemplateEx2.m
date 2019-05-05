@@ -50,9 +50,35 @@ end
 % Task 2
 %--------------------------------------------------------------------------
 
-% Ho: 
-% Ha: 
+% Ho: sigma_d = s_d
+% Ha: sigma_d != s_d
 
+% theoretical std
+sigma_d = 2.0; % mm
+% empirical stdgt
+s_d = 2.2; % mm
+
+% Degree of Freedom
+f = 9; % 10-1
+
+% %Calculate the confidence limits of x^2-Distribution
+% % S = 95%  a = 0.05 
+% a1chi2_95 = s1*sqrt(f1/chi2inv(0.975,f1));   % 1-a/2
+% b1chi2_95 = s1*sqrt(f1/chi2inv(0.025,f1));   %  a/2 
+
+% Test statistic of x^2-test
+T_chi2 = (f*s_d^2)/sigma_d^2;
+
+% Threshold value of x^2-test
+t_chi2_lo = chi2inv(0.025,f);
+t_chi2_up = chi2inv(0.975,f); 
+
+%Statistical test for a = 0.05 S = 95%
+if t_chi2_lo<T_chi2 && T_chi2<t_chi2_up
+    disp('Fails to reject the Ho.')
+else
+    disp('Rejects the Ho.')
+end
 
 
 %--------------------------------------------------------------------------
