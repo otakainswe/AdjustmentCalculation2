@@ -50,12 +50,12 @@ end
 % Task 2
 %--------------------------------------------------------------------------
 
-% Ho: sigma_d = s_d
-% Ha: sigma_d != s_d
+% Ho: sigma_d^2 = s_d^2
+% Ha: sigma_d^2 != s_d^2
 
 % theoretical std
 sigma_d = 2.0; % mm
-% empirical stdgt
+% empirical std
 s_d = 2.2; % mm
 
 % Degree of Freedom
@@ -140,6 +140,35 @@ if T_t < t_t
     disp('Fails to reject the Task4 Ho.')
 else
     disp('Rejects the Task4 Ho.')
+end
+
+%--------------------------------------------------------------------------
+% Task 5
+%--------------------------------------------------------------------------
+
+% Ho: sigma_x = s_x
+% Ha: sigma_x != s_x
+
+% theoretical variance
+sigma_x2 = 0.10; 
+% empirical variance
+s_x2 = 0.07; 
+
+% Degree of Freedom
+f = 11; % 12-1
+
+% Test statistic of x^2-test
+T_chi2 = (f*s_x2)/sigma_x2;
+
+% Threshold value of x^2-test
+t_chi2_lo = chi2inv(0.025,f);
+t_chi2_up = chi2inv(0.975,f); 
+
+%Statistical test for a = 0.05 S = 95%
+if t_chi2_lo<T_chi2 && T_chi2<t_chi2_up
+    disp('Fails to reject the Task5 Ho.')
+else
+    disp('Rejects the Task5 Ho.')
 end
 
 
