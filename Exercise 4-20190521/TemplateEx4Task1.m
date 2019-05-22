@@ -47,16 +47,16 @@ P = inv(Q_LL);
 %--------------------------------------------------------------------------
 %  Constraints
 %--------------------------------------------------------------------------
-% G = [1/sqrt(no_u) 1/sqrt(no_u) 1/sqrt(no_u) 1/sqrt(no_u)];
+%  G = [1/sqrt(no_u) 1/sqrt(no_u) 1/sqrt(no_u) 1/sqrt(no_u)];
 
 % total trace minimizataion
-% B = [1 1 1 1];
+%  B = [1 1 1 1];
 
 % partial trace minimizataion(1.2)
-% B = [1 0 0 0];
+%  B = [1 0 0 0];
 
 % partial trace minimizataion(1.3)
-B = [1 1 0 0];
+ B = [1 1 0 0];
 
 
 %--------------------------------------------------------------------------
@@ -73,9 +73,9 @@ N = A'*P*A;
 
 det_N = det(N); 
 
-% N_ext = [N G'; G 0];
+%  N_ext = [N G'; G 0];
 
- N_ext = [N B'; B 0];
+  N_ext = [N B'; B 0];
 
 %Vector of right hand side of normal equations
 n = A'*P*L;
@@ -134,6 +134,8 @@ s_v = sqrt(diag(S_vv));
 
 %Pseudo inverse
 p_N = pinv(N);
+
+
 
 
 
