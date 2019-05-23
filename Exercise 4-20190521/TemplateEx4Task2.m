@@ -38,8 +38,8 @@ G_1 = [0.5 0.5 0.5 0.5];  % G matrix always have to be toral trace min.
 B_1 = [1 0 0 0]; % new datum definition 
 
 %Similarity transformation
-S_1 = I-G_1'*(inv(B_1*G_1'))*B_1; 
 S_1 = I - G_1'*(inv(B_1*G_1'))*B_1;
+
 % 
 X_hat_tran_1 = S_1* X_hat; 
 % 
