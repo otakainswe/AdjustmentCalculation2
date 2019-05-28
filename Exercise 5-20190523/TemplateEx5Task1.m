@@ -54,10 +54,10 @@ xy = reshape(X_0(1:8),2,4);
 datum = diag([1 1 1 1]); 
 
 %Case c, points 6 and 9
-% datum = 
+% datum = diag([0 1 1 0]); 
 
 %Case d, points 6 and 1
-% datum = 
+% datum = diag([1 1 0 0]);
 
 %Number of points
 p = sum(sum(datum));               %p = 4, for case a and case b
@@ -231,10 +231,14 @@ A = zeros(no_n,no_u);
     
     %Normal matrix
     N = A'*P*A;
+    
+    %Pseudo inverse
+    p_N = pinv(N);
 
     %Case a, matrix G
     %Scaling
-    a = sqrt((x1+x6+x9+x15)^2 + (y1+y6+y9+y15)^2); 
+    a = sqrt(x1^2+x6^2+x9^2+x15^2+y1^2+y6^2+y9^2+y15^2);
+
     
     %Matrix G
     G = [0 1/sqrt(p) 1 1/sqrt(p) 0 1/sqrt(p) 0 1/sqrt(p) 0 0 0 0;
@@ -242,21 +246,30 @@ A = zeros(no_n,no_u);
         -x1/a y1/a -x6/a y6/a -x9/a y9/a -x15/a y15/a 0 0 0 0];
 
     %B matrix   
-    %Case b
-%     B = 
-
-    %Case c
-%     B = 
+    %Case b_1(total trace min)
+    B = [0 1 0 1 0 1 0 1 0 0 0 0; 
+         1 0 1 0 1 0 1 0 0 0 0 0; 
+        -x1 y1 -x6 y6 -x9 y9 -x15 y15 0 0 0 0];
+    
+    %Case b_2(partial trace min points 6,9)
+%     B = [0 0 0 1 0 1 0 0 0 0 0 0; 
+%          0 0 1 0 1 0 0 0 0 0 0 0; 
+%          0 0 -x6 y6 -x9 y9 0 0 0 0 0 0];
      
-    %Case d
-%     B = 
+    %Case b_3(partial trace min points 6,1)
+%     B = [0 1 0 1 0 0 0 0 0 0 0 0; 
+%          1 0 1 0 1 0 0 0 0 0 0 0; 
+%         -x1 y1 -x6 y6 0 0 0 0 0 0 0 0];
 
      %Extended normal matrix
 	 %For case a
-     N_ext = [N G';G zeros(3,3)]; 
-	
+     N_ext = [N G'; G zeros(3,3)];
+%      N_ext_B_1 = [N B_1'; B_1 zeros(3,3)];
+%      N_ext_B_2 = [N B_2'; B_2 zeros(3,3)];
+%      N_ext_B_3 = [N B_3'; B_3 zeros(3,3)];
+
     %For case b, c, d
-%     N_ext = 
+%      N_ext = [N B'; B zeros(3,3)]; 
 
     %Vector of right hand side of normal equations
     n = A'*P*l;
@@ -266,12 +279,21 @@ A = zeros(no_n,no_u);
 
     %Inversion of normal matrix / Cofactor matrix of the unknowns
     Q_xx_ext = inv(N_ext);
+%     Q_xx_ext_B_1 = inv(N_ext_B_1);
+%     Q_xx_ext_B_2 = inv(N_ext_B_2);
+%     Q_xx_ext_B_3 = inv(N_ext_B_3);
     
     %Reduced cofactor matrix of the unknowns
     Q_xx = Q_xx_ext(1:no_u,1:no_u); %Q_11
-    
+%     Q_xx_B_1 = Q_xx_ext_B_1(1:no_u,1:no_u); %Q_11
+%     Q_xx_B_2 = Q_xx_ext_B_2(1:no_u,1:no_u); %Q_11
+%     Q_xx_B_3 = Q_xx_ext_B_3(1:no_u,1:no_u); %Q_11
+
     %Solution of normal equation
-    x_hat = Q_xx_ext*n_ext; 
+    x_hat = Q_xx_ext*n_ext;
+%     x_hat_B_1 = Q_xx_ext_B_1*n_ext;
+%     x_hat_B_2 = Q_xx_ext_B_2*n_ext;
+%     x_hat_B_3 = Q_xx_ext_B_3*n_ext;
     
     %Adjusted unknowns
     X_hat = X_0+x_hat(1:no_u); 
@@ -389,14 +411,35 @@ gon(2) = gon(2)+400;
 gon(4) = gon(4)+400;
 
 
+
+%--------------------------------------------------------------------------
+%  Plot the adjusted value
+%--------------------------------------------------------------------------
+%figure 
+X = 1:1:12;
+Y = X_hat;
+plot(X,Y,'x-');
+hold on
+% Y2 = X_hat_B_1;
+% plot(X,Y2,'x-');
+% hold on
+% Y3 = X_hat_B_2;
+% plot(X,Y3,'x-');
+% hold on
+% Y4 = X_hat_B_3;
+% plot(X,Y4,'x-');
+% hold off
+
 % Write to file: X_hat [m] for case b
 % fid = fopen('X_hat_case_b', 'w');  %This one!
 % fprintf(fid, '%8.25f\n',X_final);
 % fclose(fid);
-
+% 
 % fidQxx = fopen('Q_xx_case_b', 'w');   
 % fprintf(fidQxx, '%8.25f %8.25f %8.25f %8.25f %8.25f %8.25f %8.25f %8.25f %8.25f %8.25f %8.25f %8.25f\n',Q_xx);
 % fclose(fidQxx);
+
+
 
 
 

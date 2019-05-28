@@ -37,7 +37,7 @@ x15 = X_hat(8);
 p = 4;
 
 %Scaling
-    a = sqrt((x1+x6+x9+x15)^2+(y1+y6+y9+y15)^2);
+ a = sqrt(x1^2+x6^2+x9^2+x15^2+y1^2+y6^2+y9^2+y15^2);
     
 %Matrix G
 %     G = 
